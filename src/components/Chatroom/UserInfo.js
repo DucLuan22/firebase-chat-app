@@ -13,6 +13,9 @@ const Wrap = styled.div`
 		color: white;
 		margin-left: 10px;
 	}
+	.logout-btn {
+		border-radius: 1rem;
+	}
 `;
 function UserInfo() {
 	return (
@@ -21,7 +24,7 @@ function UserInfo() {
 				<Avatar>A</Avatar>
 				<Typography.Text className="Username">Name</Typography.Text>
 			</div>
-			<Button>Logout</Button>
+			<Button className="logout-btn">Logout</Button>
 		</Wrap>
 	);
 }
