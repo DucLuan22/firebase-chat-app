@@ -1,32 +1,48 @@
-import React from 'react';
-import { Button, Avatar, Typography } from 'antd';
-import styled from 'styled-components';
+import React, { useEffect } from "react";
+import { Button, Avatar, Typography } from "antd";
+import styled from "styled-components";
+import { auth, db } from "../../firebase/config";
+import { AuthContext } from "../../Context/AuthProvider";
 const Wrap = styled.div`
-	display: flex;
-	justify-content: space-between;
-	flex-direction: row;
-	padding: .8rem 1rem;
-	border-bottem: 1px solid;
-	align-items: center;
-	padding-bottom: 2rem;
-	.Username {
-		color: white;
-		margin-left: 10px;
-	}
-	.logout-btn {
-		border-radius: 1rem;
-	}
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  padding: 0.8rem 1rem;
+  border-bottem: 1px solid;
+  align-items: center;
+  padding-bottom: 2rem;
+  .Username {
+    color: white;
+    margin-left: 10px;
+  }
+  .logout-btn {
+    border-radius: 1rem;
+  }
 `;
+
 function UserInfo() {
-	return (
-		<Wrap>
-			<div>
-				<Avatar>A</Avatar>
-				<Typography.Text className="Username">Name</Typography.Text>
-			</div>
-			<Button className="logout-btn">Logout</Button>
-		</Wrap>
-	);
+  //   useEffect(() => {
+  //     db.collection("users").onSnapshot((snapshopt) => {
+  //       const data = snapshopt.docs.map((doc) => ({
+  //         ...doc.data(),
+  //         id: doc.id,
+  //       }));
+  //       console.log({ data, snapshopt, docs: snapshopt.docs });
+  //     });
+  //   }, []);
+  const data = React.useContext(AuthContext);
+  console.log(data);
+  return (
+    <Wrap>
+      <div>
+        <Avatar>A</Avatar>
+        <Typography.Text className="Username">Name</Typography.Text>
+      </div>
+      <Button className="logout-btn" onClick={() => auth.signOut()}>
+        Logout
+      </Button>
+    </Wrap>
+  );
 }
 
 export default UserInfo;
