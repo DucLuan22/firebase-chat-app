@@ -30,13 +30,16 @@ function UserInfo() {
   //       console.log({ data, snapshopt, docs: snapshopt.docs });
   //     });
   //   }, []);
-  const data = React.useContext(AuthContext);
-  console.log(data);
+  const {
+    user: { displayName, photoURL },
+  } = React.useContext(AuthContext);
   return (
     <Wrap>
       <div>
-        <Avatar>A</Avatar>
-        <Typography.Text className="Username">Name</Typography.Text>
+        <Avatar src={photoURL}>
+          {photoURL != null ? "" : displayName?.charAt(0)?.toUpperCase()}
+        </Avatar>
+        <Typography.Text className="Username">{displayName}</Typography.Text>
       </div>
       <Button className="logout-btn" onClick={() => auth.signOut()}>
         Logout
