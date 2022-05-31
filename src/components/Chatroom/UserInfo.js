@@ -23,7 +23,7 @@ const Wrapper = styled.div`
   }
 `;
 
-export default function UserInfo() {
+function UserInfo() {
   const {
     user: { displayName, photoURL },
   } = React.useContext(AuthContext);
@@ -49,3 +49,5 @@ export default function UserInfo() {
     </Wrapper>
   );
 }
+
+export default UserInfo;

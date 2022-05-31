@@ -82,6 +82,7 @@ export default function ChatWindow() {
   };
 
   const handleOnSubmit = () => {
+    if (!inputValue) return;
     addDocument("messages", {
       text: inputValue,
       uid,
@@ -168,14 +169,13 @@ export default function ChatWindow() {
                   ref={inputRef}
                   onChange={handleInputChange}
                   onPressEnter={handleOnSubmit}
-                  placeholder="Entering messange..."
+                  placeholder="Enter Message"
                   bordered={false}
                   autoComplete="off"
+                  required={true}
                 />
               </Form.Item>
-              <Button type="primary" onClick={handleOnSubmit}>
-                Send
-              </Button>
+              <Button onClick={handleOnSubmit}>Send</Button>
             </FormStyled>
           </ContentStyled>
         </>
@@ -184,7 +184,7 @@ export default function ChatWindow() {
           message="Please pick a room"
           type="info"
           showIcon
-          style={{ margin: 5 }}
+          style={{ margin: 6 }}
           closable
         />
       )}

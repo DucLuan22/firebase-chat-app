@@ -12,15 +12,20 @@ const PanelStyled = styled(Panel)`
     p {
       color: white;
       background: #171717;
+      text-align: center;
     }
-    .ant-collapse-content-bos {
-      padding: 0, 40px;
-    }
-    .ant-collapse-content-bos,
+    .ant-collapse-content-box,
     button {
-      background: white;
-      color: black;
+      background: #171717;
+      color: white;
     }
+    .ant-collapse-content-box {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: start;
+    }
+
     overflow: auto;
   }
 `;
@@ -30,7 +35,7 @@ const LinkStyled = styled(Typography.Link)`
   color: white;
 `;
 
-export default function RoomList() {
+function RoomList() {
   const { rooms, setIsAddRoomVisible, setSelectedRoomId } =
     React.useContext(AppContext);
 
@@ -41,6 +46,14 @@ export default function RoomList() {
   return (
     <Collapse ghost defaultActiveKey={["1"]}>
       <PanelStyled header="List of Rooms" key="1">
+        <Button
+          type="text"
+          icon={<PlusCircleOutlined />}
+          className="add-room"
+          onClick={handleAddRoom}
+        >
+          Add Room
+        </Button>
         {rooms.map((room) => (
           <LinkStyled
             style={{ color: "white" }}
@@ -50,15 +63,8 @@ export default function RoomList() {
             {room.name}
           </LinkStyled>
         ))}
-        <Button
-          type="text"
-          icon={<PlusCircleOutlined />}
-          className="add-room"
-          onClick={handleAddRoom}
-        >
-          Add Room
-        </Button>
       </PanelStyled>
     </Collapse>
   );
 }
+export default RoomList;

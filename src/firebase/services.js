@@ -1,4 +1,4 @@
-import firebase, { db } from './config';
+import firebase, { db } from "./config";
 
 export const addDocument = (collection, data) => {
   const query = db.collection(collection);
@@ -9,31 +9,23 @@ export const addDocument = (collection, data) => {
   });
 };
 
-// tao keywords cho displayName, su dung cho search
+//Search bar
 export const generateKeywords = (displayName) => {
-  // liet ke tat cac hoan vi. vd: name = ["David", "Van", "Teo"]
-  // => ["David", "Van", "Teo"], ["David", "Teo", "Van"], ["Teo", "David", "Van"],...
-  const name = displayName.split(' ').filter((word) => word);
+  const name = displayName.split(" ").filter((word) => word);
 
   const length = name.length;
   let flagArray = [];
   let result = [];
   let stringArray = [];
 
-  /**
-   * khoi tao mang flag false
-   * dung de danh dau xem gia tri
-   * tai vi tri nay da duoc su dung
-   * hay chua
-   **/
   for (let i = 0; i < length; i++) {
     flagArray[i] = false;
   }
 
   const createKeywords = (name) => {
     const arrName = [];
-    let curName = '';
-    name.split('').forEach((letter) => {
+    let curName = "";
+    name.split("").forEach((letter) => {
       curName += letter;
       arrName.push(curName);
     });
@@ -47,7 +39,7 @@ export const generateKeywords = (displayName) => {
         result[k] = name[i];
 
         if (k === length - 1) {
-          stringArray.push(result.join(' '));
+          stringArray.push(result.join(" "));
         }
 
         findPermutation(k + 1);
