@@ -1,9 +1,9 @@
 import React from "react";
 import { Collapse, Typography, Button } from "antd";
 import styled from "styled-components";
-import { PlusCircleOutlined } from "@ant-design/icons";
+import { DeleteOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import { AppContext } from "../../Context/AppProvider";
-
+import { deleteDocument } from "../../firebase/services";
 const { Panel } = Collapse;
 
 const PanelStyled = styled(Panel)`
@@ -23,7 +23,7 @@ const PanelStyled = styled(Panel)`
       display: flex;
       align-items: center;
       flex-direction: column;
-      justify-content: start;
+      justify-content: end;
     }
 
     overflow: auto;
@@ -36,13 +36,27 @@ const LinkStyled = styled(Typography.Link)`
 `;
 
 function RoomList() {
-  const { rooms, setIsAddRoomVisible, setSelectedRoomId } =
-    React.useContext(AppContext);
+  const {
+    rooms,
+    setIsAddRoomVisible,
+    setSelectedRoomId,
+    setSelectedDeleteRoom,
+    setIsDeleteRoomVisible,
+  } = React.useContext(AppContext);
 
   const handleAddRoom = () => {
     setIsAddRoomVisible(true);
   };
 
+  function deleteRoom(id) {
+    deleteDocument("rooms", id);
+    return;
+  }
+
+  const handleModelDelete = (id) => {
+    setSelectedDeleteRoom(id);
+    setIsDeleteRoomVisible(true);
+  };
   return (
     <Collapse ghost defaultActiveKey={["1"]}>
       <PanelStyled header="List of Rooms" key="1">
@@ -61,6 +75,10 @@ function RoomList() {
             onClick={() => setSelectedRoomId(room.id)}
           >
             {room.name}
+            <DeleteOutlined
+              style={{ paddingLeft: "2rem" }}
+              onClick={() => handleModelDelete(room.id)}
+            />
           </LinkStyled>
         ))}
       </PanelStyled>

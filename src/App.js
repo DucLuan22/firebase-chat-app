@@ -5,6 +5,7 @@ import AuthProvider from "./Context/AuthProvider";
 import AppProvider from "./Context/AppProvider";
 import AddRoomModal from "./components/Modals/AddRoomModal";
 import InviteMemberModal from "./components/Modals/InviteMemberModal";
+import DeleteRoomModal from "./components/Modals/DeleteRoomModal";
 function App() {
   return (
     <Router>
@@ -14,6 +15,7 @@ function App() {
             <Route element={<Login />} path="/login" />
             <Route element={<Chatroom />} path="/" />
           </Routes>
+          <DeleteRoomModal />
           <InviteMemberModal />
           <AddRoomModal />
         </AppProvider>

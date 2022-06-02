@@ -5,10 +5,11 @@ import { AuthContext } from "./AuthProvider";
 export const AppContext = React.createContext();
 
 export default function AppProvider({ children }) {
+  const [isDeleteRoomVisible, setIsDeleteRoomVisible] = useState(false);
   const [isAddRoomVisible, setIsAddRoomVisible] = useState(false);
   const [isInviteMemberVisible, setIsInviteMemberVisible] = useState(false);
   const [selectedRoomId, setSelectedRoomId] = useState("");
-
+  const [selectedDeleteRoom, setSelectedDeleteRoom] = useState("");
   const {
     user: { uid },
   } = React.useContext(AuthContext);
@@ -42,6 +43,8 @@ export default function AppProvider({ children }) {
     setSelectedRoomId("");
     setIsAddRoomVisible(false);
     setIsInviteMemberVisible(false);
+    setIsDeleteRoomVisible(false);
+    setSelectedDeleteRoom("");
   };
 
   return (
@@ -56,7 +59,11 @@ export default function AppProvider({ children }) {
         setSelectedRoomId,
         isInviteMemberVisible,
         setIsInviteMemberVisible,
+        setIsDeleteRoomVisible,
+        isDeleteRoomVisible,
         clearState,
+        selectedDeleteRoom,
+        setSelectedDeleteRoom,
       }}
     >
       {children}

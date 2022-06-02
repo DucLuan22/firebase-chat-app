@@ -8,7 +8,13 @@ export const addDocument = (collection, data) => {
     createdAt: firebase.firestore.FieldValue.serverTimestamp(),
   });
 };
-
+export const deleteDocument = async (collection, document) => {
+  const cityRef = db.collection(collection).doc(document);
+  const res = await cityRef.delete();
+  if (res) {
+    console.log("deleted");
+  }
+};
 //Search bar
 export const generateKeywords = (displayName) => {
   const name = displayName.split(" ").filter((word) => word);
